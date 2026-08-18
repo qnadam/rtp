@@ -1,0 +1,20 @@
+services:
+  omada-controller:
+    image: mbentley/omada-controller:6.2-openj9
+    container_name: omada-controller
+    restart: unless-stopped
+    stop_grace_period: 60s
+    # Host hálózati mód szükséges/ajánlott: az Omada eszközök L2 broadcast/multicast
+    # csomagokkal keresik meg a kontrollert adoptáláskor, ez bridge módban, NAT mögött
+    # megbízhatatlan. Emiatt ez az app NEM megy át a Runtipi Traefik reverse proxyján,
+    # közvetlenül a szerver IP-jén és a lenti portokon lesz elérhető.
+    network_mode: host
+    environment:
+      - TZ=${TZ}
+      - JAVA_MAX_HEAP_SIZE=${JAVA_MAX_HEAP_SIZE}
+      - JAVA_MIN_HEAP_SIZE=${JAVA_MIN_HEAP_SIZE}
+    volumes:
+      - ${APP_DATA_DIR}/data/data:/opt/tplink/EAPController/data
+      - ${APP_DATA_DIR}/data/logs:/opt/tplink/EAPController/logs
+    labels:
+      runtipi.managed: true

@@ -1,0 +1,37 @@
+{
+  "name": "Omada Controller (OpenJ9)",
+  "id": "omada-controller",
+  "available": true,
+  "port": 8043,
+  "https": true,
+  "dynamic_config": true,
+  "tipi_version": 1,
+  "version": "6.2.10.17",
+  "categories": ["network"],
+  "short_desc": "TP-Link Omada SDN kontroller, alacsony memoriaigenyu OpenJ9 build",
+  "description": "TP-Link Omada szoftveres SDN kontroller, amivel Omada eszkozoket (access pointok, switchek, routerek) lehet felfedezni, adoptalni es kozpontilag menedzselni. Ez a build a mbentley/docker-omada-controller image OpenJ9 (Eclipse OpenJ9 JVM) valtozatat hasznalja, ami a hivatalos TP-Link kepnel jelentosen kisebb memoriaigennyel fut - kis VPS-en vagy homelab szerveren is jol mukodik. A konteiner host halozati modban fut, mert az eszkozfelfedezes (L2 broadcast/multicast) es az adoptalas emiatt megbizhatobban mukodik, mint bridge modban NAT mogott. Emiatt nincs Traefik/domain integracio, a felulet kozvetlenul a szerver IP-jen es a beallitott portokon erheto el.",
+  "author": "mbentley",
+  "source": "https://github.com/mbentley/docker-omada-controller",
+  "website": "https://github.com/mbentley/docker-omada-controller",
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "Java max heap meret",
+      "env_variable": "JAVA_MAX_HEAP_SIZE",
+      "default": "1024m",
+      "hint": "Az OpenJ9 JVM maximalis heap merete. Keves memoriaju gepen (1-2 GB RAM) csokkentheted, pl. 512m.",
+      "required": false
+    },
+    {
+      "type": "text",
+      "label": "Java min heap meret",
+      "env_variable": "JAVA_MIN_HEAP_SIZE",
+      "default": "128m",
+      "hint": "Az OpenJ9 JVM indulaskor lefoglalt minimalis heap merete.",
+      "required": false
+    }
+  ],
+  "supported_architectures": ["amd64", "arm64"],
+  "created_at": 1787064378109,
+  "updated_at": 1787064378109
+}
