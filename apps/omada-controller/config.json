@@ -5,7 +5,7 @@
   "port": 8043,
   "https": true,
   "dynamic_config": true,
-  "tipi_version": 1,
+  "tipi_version": 2,
   "version": "6.2.10.17",
   "categories": ["network"],
   "short_desc": "TP-Link Omada SDN kontroller, alacsony memoriaigenyu OpenJ9 build",

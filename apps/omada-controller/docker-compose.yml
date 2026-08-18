@@ -18,3 +18,8 @@ services:
       - ${APP_DATA_DIR}/data/logs:/opt/tplink/EAPController/logs
     labels:
       runtipi.managed: true
+
+# Kötelező blokk a Runtipi v2 dinamikus compose formátumához - enélkül a
+# telepítés séma-validációs hibával elszáll ("schemaVersion must be 2").
+x-runtipi:
+  schema_version: 2
