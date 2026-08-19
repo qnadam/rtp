@@ -1,0 +1,25 @@
+services:
+  transmission:
+    image: lscr.io/linuxserver/transmission:4.1.0-r0-ls328
+    container_name: transmission
+    restart: unless-stopped
+    ports:
+      - 9091:9091
+      - 34567:34567/tcp
+      - 34567:34567/udp
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    # Ugyanazok a host mappak, amiket eddig is hasznaltal - nincs
+    # adatmozgatas. A /mnt/nas/pk ugyanaz a NAS mount, amit a Jellyfin
+    # is hasznal, igy a letoltott anyag kozvetlenul a media konyvtarba kerul.
+    volumes:
+      - /home/a/transmission/config:/config
+      - /mnt/nas/pk:/downloads
+      - /home/a/transmission/incomplete:/incomplete
+    labels:
+      runtipi.managed: true
+
+x-runtipi:
+  schema_version: 2
