@@ -1,0 +1,21 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:10.11.6
+    container_name: jellyfin
+    restart: unless-stopped
+    ports:
+      - ${APP_PORT}:8096
+    environment:
+      - TZ=${TZ}
+    # Ugyanazok a host mappák, amiket eddig is hasznaltal kezzel inditott
+    # konteinerkent - nincs adatmozgatas, a Runtipi csak atveszi a mar
+    # meglevo konfig/cache/media konyvtarak menedzseleset.
+    volumes:
+      - /home/a/jellyfin/config:/config
+      - /home/a/jellyfin/cache:/cache
+      - /mnt/nas/pk:/data
+    labels:
+      runtipi.managed: true
+
+x-runtipi:
+  schema_version: 2
