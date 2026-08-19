@@ -5,7 +5,7 @@
   "port": 8043,
   "https": true,
   "dynamic_config": true,
-  "tipi_version": 2,
+  "tipi_version": 3,
   "version": "6.2.10.17",
   "categories": ["network"],
   "short_desc": "TP-Link Omada SDN kontroller, alacsony memoriaigenyu OpenJ9 build",
@@ -28,6 +28,14 @@
       "env_variable": "JAVA_MIN_HEAP_SIZE",
       "default": "128m",
       "hint": "Az OpenJ9 JVM indulaskor lefoglalt minimalis heap merete.",
+      "required": false
+    },
+    {
+      "type": "number",
+      "label": "MongoDB WiredTiger cache meret (GB)",
+      "env_variable": "MONGO_CACHE_GB",
+      "default": 0.25,
+      "hint": "A beagyazott MongoDB gyorsitotarja - a JVM heaptol fuggetlenul foglal memoriat. 0.25 a gyakorlati minimum, nehany (par tucat alatti) eszkoznel nyugodtan ezen tarthato.",
       "required": false
     }
   ],
