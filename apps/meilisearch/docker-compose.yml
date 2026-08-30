@@ -1,0 +1,21 @@
+services:
+  meilisearch:
+    image: getmeili/meilisearch:v1.12.8
+    container_name: meilisearch
+    restart: unless-stopped
+    environment:
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
+      - MEILI_NO_ANALYTICS=true
+      - MEILI_ENV=production
+    volumes:
+      - ${APP_DATA_DIR}/data/meili_data:/meili_data
+    # Nincs sajat web UI-ra/domainre szukseg, csak arra, hogy a Runtipi
+    # kozos halozatan (tipi_main_network) mas appok (pl. Linkwarden) el
+    # tudjak erni konteinernev alapjan: http://meilisearch:7700
+    x-runtipi:
+      add_to_main_network: true
+    labels:
+      runtipi.managed: true
+
+x-runtipi:
+  schema_version: 2
