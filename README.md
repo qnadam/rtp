@@ -97,20 +97,26 @@ Telepítés után nyisd meg `http://<szerver-ip>:9091`-en — a torrentlistának
 
 A Meilisearch telepítése önmagában simán megy, mint a többi saját app — nincs vele ütköző régi konténer:
 
-1. Runtipi App Store-ban keresd meg **"Meilisearch"**-t, telepítsd. A telepítő űrlapon a **Master Key** mező már ki van töltve egy alapértelmezett véletlen kulccsal — jegyezd fel / hagyd úgy.
-2. Mivel a Linkwarden a **hivatalos** Runtipi App Store-ból van fent, a hivatalos bejegyzést nem módosítjuk — a Runtipi "customize app config" mechanizmusával adjuk hozzá a két szükséges env változót:
+1. Runtipi App Store-ban keresd meg **"Meilisearch"**-t, telepítsd. A **Master Key** mezőt a Runtipi automatikusan tölti ki egy egyedi, véletlen értékkel telepítéskor — ez szándékosan nincs beleírva sehova a repóba (nyilvános repóban nincs helye statikus titkos kulcsnak).
+2. Telepítés után olvasd ki a generált kulcsot:
+
+   ```bash
+   docker exec runtipi grep MEILI_MASTER_KEY /app-data/a/meilisearch/app.env
+   ```
+
+3. Mivel a Linkwarden a **hivatalos** Runtipi App Store-ból van fent, a hivatalos bejegyzést nem módosítjuk — a Runtipi "customize app config" mechanizmusával adjuk hozzá a két szükséges env változót (a `<kiolvasott-ertek>` helyére írd be, amit az előző lépésben kaptál):
 
    ```bash
    docker exec runtipi mkdir -p /data/user-config/migrated/linkwarden
    docker exec runtipi sh -c 'cat > /data/user-config/migrated/linkwarden/app.env << EOF
    MEILI_HOST=http://meilisearch:7700
-   MEILI_MASTER_KEY=<a-meilisearch-telepitesnel-hasznalt-master-key>
+   MEILI_MASTER_KEY=<kiolvasott-ertek>
    EOF'
    ```
 
-   (A `migrated` a Runtipi beépített, hivatalos app store belső neve — ezt korábban már megerősítettük a te szerverdeden a logokból.)
+   (A `migrated` a Runtipi beépített, hivatalos app store belső neve — ezt korábban már megerősítettük a te szerveredén a logokból.)
 
-3. Indítsd újra a Linkwardent, hogy felvegye az új változókat:
+4. Indítsd újra a Linkwardent, hogy felvegye az új változókat:
 
    ```bash
    docker exec runtipi ./runtipi-cli app stop linkwarden:migrated
@@ -119,7 +125,7 @@ A Meilisearch telepítése önmagában simán megy, mint a többi saját app —
 
    (Vagy egyszerűbben: Runtipi felületen a Linkwarden kártyáján Stop, majd Start.)
 
-4. Linkwardenben próbáld ki a keresést. A Meilisearch bekapcsolása után hozzáadott/módosított linkek automatikusan indexelődnek; a régebbi, már meglévő linkeknél is ennek automatikusan meg kellene történnie a háttérben. Ha pár óra után sem jönnek fel keresésben, van egy ismert workaround az adatbázisban (lásd `apps/meilisearch/metadata/description.md`).
+5. Linkwardenben próbáld ki a keresést. A Meilisearch bekapcsolása után hozzáadott/módosított linkek automatikusan indexelődnek; a régebbi, már meglévő linkeknél is ennek automatikusan meg kellene történnie a háttérben. Ha pár óra után sem jönnek fel keresésben, van egy ismert workaround az adatbázisban (lásd `apps/meilisearch/metadata/description.md`).
 
 ## Frissítés később (bármelyik app)
 
