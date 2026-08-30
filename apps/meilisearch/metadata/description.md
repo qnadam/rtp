@@ -6,7 +6,13 @@ Gyors, kis erőforrásigényű keresőmotor. Ebben a setupban elsősorban azért
 
 ## Master Key
 
-A telepítő űrlapon alapértelmezetten ki van töltve egy véletlen kulccsal. **Ezt a pontos értéket másold át** annak az appnak (pl. Linkwarden) a `MEILI_MASTER_KEY` beállításába is, amelyik használni fogja — a két oldalon egyeznie kell, különben a hitelesítés elutasítja a kéréseket.
+A Runtipi telepítéskor automatikusan generál egy egyedi, biztonságos kulcsot — ez **nem** kerül bele az app store repóba (nyilvános repóban nincs helye statikus titkos kulcsnak). Telepítés után ki kell olvasnod, hogy át tudd másolni annak az appnak (pl. Linkwarden) a `MEILI_MASTER_KEY` beállításába, amelyik használni fogja — a két oldalon egyeznie kell, különben a hitelesítés elutasítja a kéréseket:
+
+```bash
+docker exec runtipi grep MEILI_MASTER_KEY /app-data/<sajat-store-slugod>/meilisearch/app.env
+```
+
+(A `<sajat-store-slugod>` az a név, amivel a saját custom app store-odat regisztráltad a Runtipiban — korábban ez `a` volt nálad.)
 
 ## Linkwarden bekötése (ha a hivatalos Runtipi store-ból van telepítve)
 

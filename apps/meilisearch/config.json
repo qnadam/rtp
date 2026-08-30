@@ -6,22 +6,21 @@
   "https": false,
   "exposable": false,
   "dynamic_config": true,
-  "tipi_version": 1,
+  "tipi_version": 2,
   "version": "1.12.8",
   "categories": ["utilities"],
   "short_desc": "Gyors keresomotor - pl. Linkwarden advanced search-hoz",
-  "description": "Meilisearch kereso szerver, elsosorban azert, hogy mas Runtipi appok (pl. Linkwarden) hasznalni tudjak a teljes szoveges kereseshez. Onmagaban nincs web UI-ja/domainre nincs szuksege, a Runtipi kozos halozatan (tipi_main_network) keresztul erhetok el 'http://meilisearch:7700' cimen mas appokbol. A Master Key mezo alapertelmezetten mar ki van toltve egy veletlen kulccsal - ezt kell atmasolni a masik app (pl. Linkwarden) MEILI_MASTER_KEY beallitasaba is.",
+  "description": "Meilisearch kereso szerver, elsosorban azert, hogy mas Runtipi appok (pl. Linkwarden) hasznalni tudjak a teljes szoveges kereseshez. Onmagaban nincs web UI-ja/domainre nincs szuksege, a Runtipi kozos halozatan (tipi_main_network) keresztul erhetok el 'http://meilisearch:7700' cimen mas appokbol. A Master Key mezot a Runtipi telepiteskor egyedi, veletlen ertekkel tolti ki - ez sosem kerul bele az app store repoba, telepites utan kell kiolvasni es atmasolni a masik app (pl. Linkwarden) MEILI_MASTER_KEY beallitasaba.",
   "author": "Meili",
   "source": "https://github.com/meilisearch/meilisearch",
   "website": "https://www.meilisearch.com",
   "form_fields": [
     {
-      "type": "text",
+      "type": "random",
       "label": "Master Key",
       "env_variable": "MEILI_MASTER_KEY",
-      "default": "6713bd4fce1ca16d562c4981e6aa7a9428fe14b06e591925",
-      "hint": "Ezt a kulcsot masold at a Linkwarden (vagy barmi mas app) MEILI_MASTER_KEY beallitasaba is - a ket oldalon egyeznie kell. Nyugodtan hagyhatod az alapertelmezett erteket.",
-      "required": true
+      "min": 32,
+      "hint": "Runtipi automatikusan generalja telepiteskor - ez az ertek nem kerul bele a repoba. Telepites utan kell kiolvasni (lasd description.md) es atmasolni a Linkwarden (vagy barmi mas app) MEILI_MASTER_KEY beallitasaba."
     }
   ],
   "supported_architectures": ["amd64", "arm64"],
