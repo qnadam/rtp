@@ -1,10 +1,11 @@
-# Saját Runtipi app store — Omada Controller + Jellyfin + Transmission
+# Saját Runtipi app store — Omada Controller + Jellyfin + Transmission + Meilisearch
 
-Ez a repó három saját Runtipi app-ot tartalmaz:
+Ez a repó négy saját Runtipi app-ot tartalmaz:
 
 - **omada-controller** — [mbentley/docker-omada-controller](https://github.com/mbentley/docker-omada-controller) OpenJ9 build, host hálózati módban
 - **jellyfin** — a már meglévő, kézzel futtatott Jellyfin példány áthozva Runtipi alá, ugyanazokkal a host mappákkal (nincs adatmozgatás)
 - **transmission** — a már meglévő, kézzel futtatott Transmission példány áthozva Runtipi alá, ugyanazokkal a portokkal és host mappákkal (nincs adatmozgatás)
+- **meilisearch** — keresőmotor a hivatalos Runtipi App Store-ból telepített **Linkwarden** advanced search funkciójához
 
 ```
 omada-runtipi-app/
@@ -18,7 +19,11 @@ omada-runtipi-app/
     │   ├── config.json
     │   ├── docker-compose.yml
     │   └── metadata/{description.md, logo.jpg}
-    └── transmission/
+    ├── transmission/
+    │   ├── config.json
+    │   ├── docker-compose.yml
+    │   └── metadata/{description.md, logo.jpg}
+    └── meilisearch/
         ├── config.json
         ├── docker-compose.yml
         └── metadata/{description.md, logo.jpg}
@@ -88,6 +93,34 @@ Utána a Runtipi App Store-ban keresd meg **"Transmission (saját)"**-t, és tel
 
 Telepítés után nyisd meg `http://<szerver-ip>:9091`-en — a torrentlistának és beállításoknak azonnal ott kell lenniük.
 
+## Meilisearch telepítése + bekötés a (hivatalos store-os) Linkwardenbe
+
+A Meilisearch telepítése önmagában simán megy, mint a többi saját app — nincs vele ütköző régi konténer:
+
+1. Runtipi App Store-ban keresd meg **"Meilisearch"**-t, telepítsd. A telepítő űrlapon a **Master Key** mező már ki van töltve egy alapértelmezett véletlen kulccsal — jegyezd fel / hagyd úgy.
+2. Mivel a Linkwarden a **hivatalos** Runtipi App Store-ból van fent, a hivatalos bejegyzést nem módosítjuk — a Runtipi "customize app config" mechanizmusával adjuk hozzá a két szükséges env változót:
+
+   ```bash
+   docker exec runtipi mkdir -p /data/user-config/migrated/linkwarden
+   docker exec runtipi sh -c 'cat > /data/user-config/migrated/linkwarden/app.env << EOF
+   MEILI_HOST=http://meilisearch:7700
+   MEILI_MASTER_KEY=<a-meilisearch-telepitesnel-hasznalt-master-key>
+   EOF'
+   ```
+
+   (A `migrated` a Runtipi beépített, hivatalos app store belső neve — ezt korábban már megerősítettük a te szerverdeden a logokból.)
+
+3. Indítsd újra a Linkwardent, hogy felvegye az új változókat:
+
+   ```bash
+   docker exec runtipi ./runtipi-cli app stop linkwarden:migrated
+   docker exec runtipi ./runtipi-cli app start linkwarden:migrated
+   ```
+
+   (Vagy egyszerűbben: Runtipi felületen a Linkwarden kártyáján Stop, majd Start.)
+
+4. Linkwardenben próbáld ki a keresést. A Meilisearch bekapcsolása után hozzáadott/módosított linkek automatikusan indexelődnek; a régebbi, már meglévő linkeknél is ennek automatikusan meg kellene történnie a háttérben. Ha pár óra után sem jönnek fel keresésben, van egy ismert workaround az adatbázisban (lásd `apps/meilisearch/metadata/description.md`).
+
 ## Frissítés később (bármelyik app)
 
 1. `apps/<app>/docker-compose.yml`-ben cseréld le az image tag-et
@@ -101,6 +134,8 @@ Telepítés után nyisd meg `http://<szerver-ip>:9091`-en — a torrentlistának
 - [mbentley/docker-omada-controller](https://github.com/mbentley/docker-omada-controller)
 - [jellyfin/jellyfin](https://github.com/jellyfin/jellyfin) — hivatalos image, tagek
 - [linuxserver/docker-transmission](https://github.com/linuxserver/docker-transmission) — image, tagek
+- [meilisearch/meilisearch](https://github.com/meilisearch/meilisearch) — image, tagek
+- [Linkwarden — advanced search docs](https://docs.linkwarden.app/Usage/advanced-search)
 - [Runtipi — Create your own app store](https://runtipi.io/docs/guides/create-your-own-app-store)
 - [Runtipi — Creating apps](https://runtipi.io/docs/developers/creating-apps)
 - [Runtipi — config.json reference](https://runtipi.io/docs/reference/config-json)
