@@ -1,21 +1,24 @@
 {
-  "name": "Jellyfin (sajat)",
-  "id": "jellyfin",
+  "name": "FreeFileSync",
+  "id": "freefilesync",
   "available": true,
-  "port": 8096,
-  "https": false,
-  "exposable": false,
+  "short_desc": "Grafikus fajlszinkronizalo bongeszoben - osszehasonlitja a forrast es a celt mentes elott.",
+  "author": "jlesage",
+  "port": 8280,
+  "categories": [
+    "utilities"
+  ],
+  "description": "FreeFileSync webes (noVNC-n keresztuli) grafikus feluleten, jlesage konteneresitett buildjeben. A forras es a cel tartalmat oldalt egymas mellett hasonlitja ossze, szinkodolva mutatja mi lesz letrehozva, felulirva vagy torolve, es csak jovahagyas utan inditja a tenyleges masolast. Sima fajlszintu mentesre val, dedup vagy sajat tarolasi format nelkul - a celon (pl. Synology, SFTP-n keresztul) kozvetlenul bongeszheto fajlok maradnak.",
+  "tipi_version": 2,
+  "version": "v26.08.2",
+  "source": "https://github.com/jlesage/docker-freefilesync",
+  "exposable": true,
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ],
+  "created_at": 1789485362610,
+  "updated_at": 1789485362610,
   "dynamic_config": true,
-  "tipi_version": 1,
-  "version": "10.11.6",
-  "categories": ["media"],
-  "short_desc": "Sajat, meglevo Jellyfin peldany athozva Runtipi ala",
-  "description": "Ez a bejegyzes nem a hivatalos linuxserver/jellyfin alapu Runtipi app-ot hasznalja, hanem a hivatalos jellyfin/jellyfin image-et, es kozvetlenul a mar meglevo konfig/cache/media mappakra mutat (/home/a/jellyfin/config, /home/a/jellyfin/cache, /mnt/nas/pk). Igy a konyvtar, felhasznalok es nezettsegi elozmenyek valtozas nelkul megmaradnak, csak a konteiner inditasat/leallitasat/frissiteset veszi at a Runtipi. A verzio (10.11.6) szandekosan rogzitett, hogy ne induljon automatikus adatbazis-migraciot okozo frissites a hatad mogott.",
-  "author": "jellyfin.org",
-  "source": "https://github.com/jellyfin/jellyfin",
-  "website": "https://jellyfin.org",
-  "form_fields": [],
-  "supported_architectures": ["amd64", "arm64"],
-  "created_at": 1787126590933,
-  "updated_at": 1787126590933
+  "form_fields": []
 }
