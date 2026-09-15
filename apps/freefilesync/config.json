@@ -15,8 +15,7 @@
   "exposable": true,
   "supported_architectures": [
     "amd64",
-    "arm64",
-    "armv7"
+    "arm64"
   ],
   "created_at": 1789485362610,
   "updated_at": 1789485362610,
