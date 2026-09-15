@@ -1,0 +1,25 @@
+{
+  "name": "FreeFileSync",
+  "id": "freefilesync",
+  "available": true,
+  "short_desc": "Grafikus fajlszinkronizalo bongeszoben - osszehasonlitja a forrast es a celt mentes elott.",
+  "author": "jlesage",
+  "port": 8280,
+  "categories": [
+    "utilities"
+  ],
+  "description": "FreeFileSync webes (noVNC-n keresztuli) grafikus feluleten, jlesage konteneresitett buildjeben. A forras es a cel tartalmat oldalt egymas mellett hasonlitja ossze, szinkodolva mutatja mi lesz letrehozva, felulirva vagy torolve, es csak jovahagyas utan inditja a tenyleges masolast. Sima fajlszintu mentesre val, dedup vagy sajat tarolasi format nelkul - a celon (pl. Synology, SFTP-n keresztul) kozvetlenul bongeszheto fajlok maradnak.",
+  "tipi_version": 2,
+  "version": "v26.08.2",
+  "source": "https://github.com/jlesage/docker-freefilesync",
+  "exposable": true,
+  "supported_architectures": [
+    "amd64",
+    "arm64",
+    "armv7"
+  ],
+  "created_at": 1789485362610,
+  "updated_at": 1789485362610,
+  "dynamic_config": true,
+  "form_fields": []
+}
