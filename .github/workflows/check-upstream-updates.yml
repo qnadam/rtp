@@ -1,0 +1,48 @@
+name: Check upstream app updates
+
+# Naponta megnézi a figyelt appok (jellyfin, omada-controller, transmission,
+# meilisearch) Docker Hub tag-jeit, és ha újabbat talál a jelenleg a
+# docker-compose.yml-ben rögzítettnél, automatikusan:
+#   - frissíti az image tag-et a docker-compose.yml-ben
+#   - bumpolja a config.json "version" mezőjét és "tipi_version" számlálóját
+#   - közvetlenül commitol + push-ol a main branch-re
+#
+# FONTOS: ez CSAK a repót módosítja (a "polcon lévő címkét"). A futó
+# konténer/Runtipi app csak akkor frissül, ha utána a Runtipiban
+# (Update App Stores -> adott app -> Update) te magad rákattintasz.
+# Tehát a tényleges telepített verzió váltása továbbra is kézi/jóváhagyott
+# lépés marad, csak a "van új verzió" infóhoz nem kell magadnak
+# figyelned a GitHub/Docker Hub oldalakat.
+
+on:
+  schedule:
+    - cron: '17 6 * * *'   # minden nap kb. 06:17 UTC
+  workflow_dispatch: {}     # kézi indítás is lehetséges az Actions fülről
+
+permissions:
+  contents: write
+
+jobs:
+  check-updates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check upstream versions and bump files if needed
+        run: python3 scripts/check_upstream_updates.py
+
+      - name: Commit and push changes
+        run: |
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "chore: bump upstream app version(s) (automated check)"
+            git push
+          else
+            echo "Nincs új verzió, nincs mit commitolni."
+          fi
