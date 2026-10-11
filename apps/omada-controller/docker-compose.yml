@@ -1,6 +1,6 @@
 services:
   omada-controller:
-    image: mbentley/omada-controller:6.2-openj9
+    image: mbentley/omada-controller:6.3-openj9
     container_name: omada-controller
     restart: unless-stopped
     stop_grace_period: 60s

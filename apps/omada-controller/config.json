@@ -5,9 +5,11 @@
   "port": 8043,
   "https": true,
   "dynamic_config": true,
-  "tipi_version": 3,
-  "version": "6.2.10.17",
-  "categories": ["network"],
+  "tipi_version": 4,
+  "version": "6.3-openj9",
+  "categories": [
+    "network"
+  ],
   "short_desc": "TP-Link Omada SDN kontroller, alacsony memoriaigenyu OpenJ9 build",
   "description": "TP-Link Omada szoftveres SDN kontroller, amivel Omada eszkozoket (access pointok, switchek, routerek) lehet felfedezni, adoptalni es kozpontilag menedzselni. Ez a build a mbentley/docker-omada-controller image OpenJ9 (Eclipse OpenJ9 JVM) valtozatat hasznalja, ami a hivatalos TP-Link kepnel jelentosen kisebb memoriaigennyel fut - kis VPS-en vagy homelab szerveren is jol mukodik. A konteiner host halozati modban fut, mert az eszkozfelfedezes (L2 broadcast/multicast) es az adoptalas emiatt megbizhatobban mukodik, mint bridge modban NAT mogott. Emiatt nincs Traefik/domain integracio, a felulet kozvetlenul a szerver IP-jen es a beallitott portokon erheto el.",
   "author": "mbentley",
@@ -39,7 +41,10 @@
       "required": false
     }
   ],
-  "supported_architectures": ["amd64", "arm64"],
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ],
   "created_at": 1787064378109,
-  "updated_at": 1787064378109
+  "updated_at": 1791735311239
 }

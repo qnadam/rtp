@@ -6,16 +6,21 @@
   "https": false,
   "exposable": false,
   "dynamic_config": true,
-  "tipi_version": 1,
-  "version": "4.1.0-r0-ls328",
-  "categories": ["utilities"],
+  "tipi_version": 2,
+  "version": "4.1.3-r0-ls363",
+  "categories": [
+    "utilities"
+  ],
   "short_desc": "Sajat, meglevo Transmission peldany athozva Runtipi ala",
   "description": "A mar meglevo, kezzel inditott Transmission (linuxserver/transmission) konteinert veszi at a Runtipi, valtozatlan portokkal (9091 web UI, 34567 tcp+udp peer port) es host mappakkal (/home/a/transmission/config, /home/a/transmission/incomplete, /mnt/nas/pk). Nincs adatmozgatas, a peer port szandekosan fix, mert a routeren erre van forwardolva a bejovo torrent kapcsolatokhoz. A verzio rogzitett, hogy ne induljon automatikus frissites a hatad mogott.",
   "author": "linuxserver.io",
   "source": "https://github.com/linuxserver/docker-transmission",
   "website": "https://transmissionbt.com",
   "form_fields": [],
-  "supported_architectures": ["amd64", "arm64"],
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ],
   "created_at": 1787127625540,
-  "updated_at": 1787127625540
+  "updated_at": 1791735313107
 }
