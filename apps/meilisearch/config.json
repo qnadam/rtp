@@ -6,8 +6,8 @@
   "https": false,
   "exposable": false,
   "dynamic_config": true,
-  "tipi_version": 3,
-  "version": "1.54.3",
+  "tipi_version": 4,
+  "version": "1.55.0",
   "categories": [
     "utilities"
   ],
@@ -30,5 +30,5 @@
     "arm64"
   ],
   "created_at": 1788092423609,
-  "updated_at": 1791735314845
+  "updated_at": 1791819588461
 }
