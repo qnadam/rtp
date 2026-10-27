@@ -6,8 +6,8 @@
   "https": false,
   "exposable": false,
   "dynamic_config": true,
-  "tipi_version": 3,
-  "version": "12.3",
+  "tipi_version": 4,
+  "version": "12.4",
   "categories": [
     "media"
   ],
@@ -22,5 +22,5 @@
     "arm64"
   ],
   "created_at": 1787126590933,
-  "updated_at": 1792756063852
+  "updated_at": 1793103759775
 }
