@@ -26,12 +26,13 @@ jobs:
           path: upstream
 
       - name: Patch Dockerfile for current Alpine ruby packaging
-        # Az upstream Dockerfile a ruby-etc + ruby-json csomagokat kéri,
-        # de ezeket az Alpine 3.22-től megszüntették (beolvadtak a sima
-        # "ruby" csomagba). A getoptlong viszont a Ruby 3.4-től kikerült
-        # az alap gem-kiszállításból, azt külön kell kérni.
+        # A Ruby 3.4 több régi "default gem"-et (getoptlong, base64, rss,
+        # stb.) kiszervezett külön csomagokba. Az Alpine "ruby-full"
+        # meta-package ezeket mind behúzza egyben, a ruby-yaml-t pedig
+        # külön kell kérni (community repo-s csomag, ezt a ruby-full nem
+        # tartalmazza). Így nem kell egyenként kergetni a hiányzó darabokat.
         run: |
-          sed -i 's/apk add --no-cache ruby ruby-etc ruby-json/apk add --no-cache ruby ruby-getoptlong/' upstream/Dockerfile
+          sed -i 's/apk add --no-cache ruby ruby-etc ruby-json/apk add --no-cache ruby-full ruby-yaml/' upstream/Dockerfile
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
