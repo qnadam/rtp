@@ -25,6 +25,15 @@ jobs:
           ref: ${{ env.UPSTREAM_REF }}
           path: upstream
 
+      - name: Patch Dockerfile for current Alpine ruby packaging
+        # Az upstream Dockerfile a ruby-etc + ruby-json csomagokat kéri
+        # külön is, de ezeket az Alpine 3.22-től összevonták a sima "ruby"
+        # csomagba (https://pkgs.alpinelinux.org/packages?name=ruby-json).
+        # A lebegő "alpine:3" tag emiatt 2026 végétől törik ezen a soron -
+        # itt javítjuk, hogy ne kelljen az upstream fix-ére várni.
+        run: |
+          sed -i 's/apk add --no-cache ruby ruby-etc ruby-json/apk add --no-cache ruby/' upstream/Dockerfile
+
       - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
