@@ -1,12 +1,13 @@
 services:
   transmission-rss:
-    # FONTOS: cseréld le qnadam-t a saját GitHub felhasználó-/
-    # szervezetnevedre, miután lefutott a build-transmission-rss.yml workflow
-    # legalább egyszer (Actions fülön "Run workflow" -> onnantól létezik
-    # a ghcr.io/<te>/transmission-rss:latest image).
     image: ghcr.io/qnadam/transmission-rss:latest
     container_name: transmission-rss
     restart: unless-stopped
+    # Ruby alapból pufferelve írja a stdout-ot, ha nem terminálra megy
+    # (mint egy konténerben) - emiatt a "docker logs" sokáig üresnek
+    # tűnhet, miközben a program rendben fut. Ez kényszeríti ki az
+    # azonnali (unbuffered) kiírást.
+    command: ["ruby", "-e", "STDOUT.sync = true; STDERR.sync = true; load '/usr/bin/transmission-rss'"]
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
