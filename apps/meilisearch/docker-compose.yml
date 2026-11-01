@@ -7,6 +7,7 @@ services:
       - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
       - MEILI_NO_ANALYTICS=true
       - MEILI_ENV=production
+      - MEILI_UPGRADE_DB=true
     volumes:
       - ${APP_DATA_DIR}/data/meili_data:/meili_data
     # Nincs sajat web UI-ra/domainre szukseg, csak arra, hogy a Runtipi
