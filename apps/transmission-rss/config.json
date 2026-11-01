@@ -1,0 +1,19 @@
+{
+  "name": "Transmission RSS",
+  "id": "transmission-rss",
+  "available": true,
+  "exposable": false,
+  "no_gui": true,
+  "dynamic_config": true,
+  "tipi_version": 1,
+  "version": "latest",
+  "categories": ["utilities"],
+  "short_desc": "RSS feedek figyelese, torrentek automatikus hozzaadasa a Transmissionhoz",
+  "description": "A nning/transmission-rss sajat build-je (lasd .github/workflows/build-transmission-rss.yml, ghcr.io-ra pusholva, mivel a hivatalos Docker Hub image mar evek ota nem frissult). RSS feedeket figyel, es az uj, illeszkedo elemeket automatikusan hozzaadja a mar futo Transmission kliens torrentlistajahoz az RPC API-n keresztul. Nincs sajat web felulete - a konfiguracio egy /etc/transmission-rss.conf YAML fajlban tortenik, amit telepites ELOTT kezzel kell letrehozni a host oldalon (lasd description.md).",
+  "author": "nning",
+  "source": "https://github.com/nning/transmission-rss",
+  "form_fields": [],
+  "supported_architectures": ["amd64"],
+  "created_at": 1793527215201,
+  "updated_at": 1793527215201
+}
