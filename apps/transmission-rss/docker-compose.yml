@@ -1,10 +1,10 @@
 services:
   transmission-rss:
-    # FONTOS: cseréld le <GITHUB_USERNAME>-t a saját GitHub felhasználó-/
+    # FONTOS: cseréld le qnadam-t a saját GitHub felhasználó-/
     # szervezetnevedre, miután lefutott a build-transmission-rss.yml workflow
     # legalább egyszer (Actions fülön "Run workflow" -> onnantól létezik
     # a ghcr.io/<te>/transmission-rss:latest image).
-    image: ghcr.io/<GITHUB_USERNAME>/transmission-rss:latest
+    image: ghcr.io/qnadam/transmission-rss:latest
     container_name: transmission-rss
     restart: unless-stopped
     extra_hosts:
