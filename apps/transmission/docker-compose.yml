@@ -1,6 +1,6 @@
 services:
   transmission:
-    image: lscr.io/linuxserver/transmission:4.1.4-r0-ls367
+    image: lscr.io/linuxserver/transmission:4.1.4-r0-ls368
     container_name: transmission
     restart: unless-stopped
     ports:
