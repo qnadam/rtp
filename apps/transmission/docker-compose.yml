@@ -20,6 +20,8 @@ services:
       - /home/a/transmission/incomplete:/incomplete
     labels:
       runtipi.managed: true
+    x-runtipi:
+      add_to_main_network: true
 
 x-runtipi:
   schema_version: 2
